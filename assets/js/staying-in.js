@@ -312,7 +312,8 @@ var getWatchProviders = function (movieId, movieObjectIndex, castString){
             if(response.ok){
                 response.json()
         .then(data => {
-            if(data.results['US'].link != undefined){
+            console.log(data);
+            if(Object.keys(data.results).length !== 0){
                 watchLink = data.results['US'].link;
             }
                         
@@ -346,10 +347,11 @@ var getWatchProviders = function (movieId, movieObjectIndex, castString){
                 var blockWatchProviders = document.createElement('div');
                 blockWatchProviders.className = 'block text-color';
                 blockWatchProviders.innerHTML = `For a link to watch providers for this film, click <a href='` + watchLink + `'>here</a>.`;
+                divMovieInformationList.insertBefore(blockWatchProviders, divMovieInformationList.childNodes[0]);
             }
             
             // do the necessary appends, and finally append everything to divContainer
-            divMovieInformationList.prepend(blockMoviePlot, blockReleaseDate, blockMovieCast, blockWatchProviders);
+            divMovieInformationList.prepend(blockMoviePlot, blockReleaseDate, blockMovieCast);
             divContainerChild.append(divMoviePosterImage, divMovieInformationList);
             divContainer.append(divContainerChild);
         })
