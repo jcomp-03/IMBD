@@ -187,7 +187,7 @@ var amendFavoritesList = function(event) {
                                         <span class='icon'>
                                             <i class='far fa-star'></i>
                                         </span>
-                                    <span>Add</span>
+                                        <span>Add</span>
                                     </span>`;
         } else {
             currentFavorites = currentFavorites ? JSON.parse(currentFavorites) : [];
@@ -312,8 +312,10 @@ var getWatchProviders = function (movieId, movieObjectIndex, castString){
             if(response.ok){
                 response.json()
         .then(data => {
-            watchLink = data.results['US'].link;
-            
+            if(data.results['US'].link != undefined){
+                watchLink = data.results['US'].link;
+            }
+                        
             // clear out divContainer and divMovieInformationList
             divContainerChild.replaceChildren();
             divMovieInformationList.replaceChildren();
@@ -340,9 +342,12 @@ var getWatchProviders = function (movieId, movieObjectIndex, castString){
             var blockMovieCast = document.createElement('div');
             blockMovieCast.className = 'block text-color';
             blockMovieCast.innerText = 'Cast Includes: ' + castString;
-            var blockWatchProviders = document.createElement('div');
-            blockWatchProviders.className = 'block text-color';
-            blockWatchProviders.innerHTML = `For a link to watch providers for this film, click <a href='` + watchLink + `'>here</a>.`;
+            if(watchLink != ''){
+                var blockWatchProviders = document.createElement('div');
+                blockWatchProviders.className = 'block text-color';
+                blockWatchProviders.innerHTML = `For a link to watch providers for this film, click <a href='` + watchLink + `'>here</a>.`;
+            }
+            
             // do the necessary appends, and finally append everything to divContainer
             divMovieInformationList.prepend(blockMoviePlot, blockReleaseDate, blockMovieCast, blockWatchProviders);
             divContainerChild.append(divMoviePosterImage, divMovieInformationList);
