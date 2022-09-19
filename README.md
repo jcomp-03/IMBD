@@ -13,7 +13,7 @@
 * https://github.com/meganann201
 * https://github.com/jcomp-03
 
-### Link to deployed application: https://jcomp-03.github.io/Project-1-RWD-Movie-Search-Platform/
+### Link to deployed application: https://jcomp-03.github.io/IMBD/
 
 ## Screenshots
 
